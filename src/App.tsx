@@ -1,12 +1,13 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import InputText from './components/InputText';
+import WeatherCard from './components/WeatherCard';
 
 function App() {
   const [data, setData] = useState({});
   
   const searchLocation = (location: string) => {
-    const url = `${process.env.REACT_APP_OPENWEATHER_API_ENDPOINT}?q=${location}&appid=${process.env.REACT_APP_OPENWEATHER_API_KEY}`
+    const url = `${process.env.REACT_APP_OPENWEATHER_API_ENDPOINT}?q=${location}&units=metric&appid=${process.env.REACT_APP_OPENWEATHER_API_KEY}`
     axios.get(url)
       .then((response) => {
         setData(response.data);
@@ -19,6 +20,7 @@ function App() {
           placeholder={'Type the city name here.'}
           handleEnter={searchLocation}
          />
+        <WeatherCard weatherData={data} />
       </div>
     </div>
   );
