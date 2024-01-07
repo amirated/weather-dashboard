@@ -4,6 +4,8 @@ import WeatherCard from './components/WeatherCard';
 import WeekForecast from './components/WeekForecast';
 import { getAPI } from './utils/api';
 
+import { FaBookmark, FaRegBookmark } from "react-icons/fa6";
+
 function App() {
   const [data, setData] = useState();
   const [currentLocation, setCurrentLocation] = useState("");
@@ -61,18 +63,31 @@ function App() {
       setSavedLocations([...locationsArr]);
     };
 
-    let savedLocationsList;
-    try {
-      savedLocationsList = localStorage.getItem('savedLocationsList') || '';
-    } catch (error) {
-      savedLocationsList = null;
-    }
+    const removeFromSavedLocations = () => {
+      let savedLocationsList = localStorage.getItem('savedLocationsList') || '';
+      let locationsArr = savedLocationsList.split(',');
+      let locationIndex = locationsArr.indexOf(currentLocation);
+      locationsArr.splice(locationIndex, 1);
+      savedLocationsList = locationsArr.join(',');
+      localStorage.setItem('savedLocationsList', savedLocationsList);
+      setSavedLocations([...locationsArr]);
+    };
+
+    let savedLocationsList = localStorage.getItem('savedLocationsList') || '';
     if (!currentLocation) {
       return null;
     } else if (savedLocationsList && savedLocationsList.indexOf(currentLocation) !== -1) {
-      return <p>saved</p>;
+      return <>
+        <button onClick={() => removeFromSavedLocations()}>
+          <FaBookmark className="text-blue-500" />
+        </button>
+      </>
     } else {
-      return <button onClick={() => addToSavedLocations()}>save</button>;
+      return <>
+        <button onClick={() => addToSavedLocations()}>
+          <FaRegBookmark className="text-blue-500" />
+        </button>
+      </>
     }
   }, [currentLocation]);
 
