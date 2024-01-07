@@ -24,7 +24,7 @@ const ContentPanel: FC<ContentPanelProps> = ({ updateSavedLocations }) => {
           setData(res);
         });
         getAPI(weekForecastURL).then((res: any) => {
-          setWeekData(res.list.splice(0, 7));
+          setWeekData(res.list.splice(0, 5));
         });
     }
 

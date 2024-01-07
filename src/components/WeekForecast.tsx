@@ -10,15 +10,11 @@ const WEEK_DAYS = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Satu
 const WeekForecast: FC<WeekForecastProps> = ({ weekData }) => {
 
     const dayOfWeek = new Date().getDay();
-    const forecastDays = WEEK_DAYS.slice(dayOfWeek, WEEK_DAYS.length).concat(WEEK_DAYS.slice(0, dayOfWeek));
-
-    useEffect(() => {
-        console.log(weekData[0].weather[0]);
-    }, [weekData]);
+    const forecastDays = WEEK_DAYS.slice(dayOfWeek, 5).concat(WEEK_DAYS.slice(0, dayOfWeek));
 
     return (
         <>
-            <label className="">Forecast for the week</label>
+            <label className="">Five days forecast</label>
             <Accordion allowZeroExpanded>
                 {weekData.map((item: any, index: number) => {
                     return <AccordionItem key={`item-${index}`}>

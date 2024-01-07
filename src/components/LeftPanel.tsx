@@ -1,37 +1,23 @@
 import React, { FC, useCallback, useEffect, useState } from "react";
+import SortableList from "./SortableList";
 
 interface LeftPanelProps {
     locationsList: string[];
 }
 
 const LeftPanel: FC<LeftPanelProps> = ({ locationsList }) => {
-
-    const [savedLocations, setSavedLocations] = useState<string[]>([]);
-
-    useEffect(() => {
-        setSavedLocations([...locationsList]);
-    }, [locationsList]);
-    
     const renderSavedLocations = useCallback(() => {
-        if (savedLocations.length === 0) {
-          let savedLocationsList = localStorage.getItem('savedLocationsList') || '';
-          let locationsArr = savedLocationsList.split(',');
-          return <>
-            {locationsArr.map((item, index) => {
-              return <div>{item}</div>
-            })}
-            </>
+        if (locationsList.length === 0) {
+            let savedLocationsList = localStorage.getItem('savedLocationsList') || '';
+            let locationsArr = savedLocationsList.split(',');
+            return <SortableList itemList={locationsArr}/>
         } else {
-          return <>
-            {savedLocations.map((item, index) => {
-              return <div>{item}</div>
-            })}
-            </>
+            return <SortableList itemList={locationsList}/>
         }
-    }, [savedLocations]);
+    }, [locationsList]);
 
     return (
-        <div className="float-left w-2/12 bg-red-200">
+        <div className="float-left w-2/12 bg-red-200 pl-4">
             {renderSavedLocations()}
         </div>
     );
