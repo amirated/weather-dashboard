@@ -24,7 +24,7 @@ const Sortable: FC<SortableProps> = ({item}) => {
   }
 
   return (
-    <div className="h-[100px] w-[100px] bg-red-500 p-2 my-1" ref={setNodeRef} style={style} {...attributes} {...listeners}>
+    <div className="h-[100px] w-[100px] bg-yellow-50 rounded p-2 my-1" ref={setNodeRef} style={style} {...attributes} {...listeners}>
       {/* <WeatherCard weatherData={item} /> */}
       {item}
     </div>

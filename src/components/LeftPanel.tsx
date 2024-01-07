@@ -17,7 +17,7 @@ const LeftPanel: FC<LeftPanelProps> = ({ locationsList }) => {
     }, [locationsList]);
 
     return (
-        <div className="float-left w-2/12 bg-red-200 pl-4">
+        <div className="float-left w-3/12 bg-gray-200 pl-4">
             {renderSavedLocations()}
         </div>
     );

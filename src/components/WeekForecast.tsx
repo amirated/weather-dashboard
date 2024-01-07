@@ -13,14 +13,14 @@ const WeekForecast: FC<WeekForecastProps> = ({ weekData }) => {
     const forecastDays = WEEK_DAYS.slice(dayOfWeek, 5).concat(WEEK_DAYS.slice(0, dayOfWeek));
 
     return (
-        <>
-            <label className="">Five days forecast</label>
+        <div className="mt-6">
+            {/* <label className="">Five days forecast</label> */}
             <Accordion allowZeroExpanded>
                 {weekData.map((item: any, index: number) => {
                     return <AccordionItem key={`item-${index}`}>
                         <AccordionItemHeading>
                             <AccordionItemButton>
-                                <div className="bg-red-100 border flex cursor-pointer">
+                                <div className="bg-gray-200 border flex cursor-pointer rounded">
                                     <img alt="weather" className="w-[40px] bg-blue-100" src={`http://openweathermap.org/img/wn/${weekData[index].weather[0].icon}.png`} />
                                     <label className="mx-1 flex-1 cursor-pointer">{forecastDays[index]}</label>
                                     <label className="mx-1 flex-1 cursor-pointer">{item.weather[0].description}</label>
@@ -51,7 +51,7 @@ const WeekForecast: FC<WeekForecastProps> = ({ weekData }) => {
                     </AccordionItem>
                 })}
             </Accordion>
-        </>
+        </div>
     )
 }
 

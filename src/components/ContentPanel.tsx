@@ -4,6 +4,7 @@ import { getAPI } from "../utils/api";
 import WeatherCard from "./WeatherCard";
 import { FaBookmark, FaRegBookmark } from "react-icons/fa6";
 import WeekForecast from "./WeekForecast";
+import EmptyContent from "./EmptyContent";
 
 interface ContentPanelProps {
     updateSavedLocations: any;
@@ -60,13 +61,13 @@ const ContentPanel: FC<ContentPanelProps> = ({ updateSavedLocations }) => {
           return null;
         } else if (savedLocationsList && savedLocationsList.indexOf(currentLocation) !== -1) {
           return <>
-            <button onClick={() => removeFromSavedLocations()}>
+            <button className="relative left-[240px]" onClick={() => removeFromSavedLocations()}>
               <FaBookmark className="text-blue-500" />
             </button>
           </>
         } else {
           return <>
-            <button onClick={() => addToSavedLocations()}>
+            <button className="relative left-[240px]" onClick={() => addToSavedLocations()}>
               <FaRegBookmark className="text-blue-500" />
             </button>
           </>
@@ -78,15 +79,22 @@ const ContentPanel: FC<ContentPanelProps> = ({ updateSavedLocations }) => {
     }, [weekData]);
 
     return (
-        <div className="w-10/12 p-4 bg-green-100">
+        <div className="w-9/12 p-4 bg-gray-100">
             <InputText
                 placeholder={'Type the city name here.'}
                 handleEnter={searchLocation}
             />
-            {renderCurrentWeather()}
-            {renderSaveStatus()}
-            <hr />
-            {renderWeekForecast()}
+            {currentLocation ? 
+              <>
+                {renderCurrentWeather()}
+                <label className="text-gray-600">Five days forecast</label>
+                {renderSaveStatus()}
+                {renderWeekForecast()}
+              </>
+            : <div>
+                <EmptyContent />
+              </div>
+            }
         </div>
     );
 };
