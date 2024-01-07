@@ -8,7 +8,7 @@ const WeatherCard: FC<WeatherCardProps> = ({ weatherData }) => {
     return (
         <div>
             {weatherData.weather ? (
-                <div className="w-[400px] h-[180px] bg-blue-100 shadow-lg rounded-xl m-auto relative px-4 mt-[2%] mb-[2%] text-blue-900">
+                <div className="w-[390px] h-[180px] bg-blue-100 shadow-lg rounded-xl relative px-4 mt-[2%] mb-[2%] text-blue-900">
                     <div className="flex justify-between w-full animate-appear">
                         <div className="w-1/2 my-1 mx-auto flex justify-between items-center">
                             <div>
