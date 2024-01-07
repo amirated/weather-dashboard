@@ -26,7 +26,7 @@ const WeekForecast: FC<WeekForecastProps> = ({ weekData }) => {
                             <AccordionItemButton>
                                 <div className="bg-red-100 border flex cursor-pointer">
                                     <img alt="weather" className="w-[40px] bg-blue-100" src={`http://openweathermap.org/img/wn/${weekData[index].weather[0].icon}.png`} />
-                                    <label className="mx-1 flex-1 cursor-pointer">{forecastDays[index]},</label>
+                                    <label className="mx-1 flex-1 cursor-pointer">{forecastDays[index]}</label>
                                     <label className="mx-1 flex-1 cursor-pointer">{item.weather[0].description}</label>
                                     <label className="mx-1 flex-1 cursor-pointer">{item.main.temp_min.toFixed()}°C / {item.main.temp_max.toFixed()}°C</label>
                                 </div>
