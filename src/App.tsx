@@ -96,16 +96,25 @@ function App() {
   }, [weekData]);
 
   return (
-    <div className="w-full h-full relative">
-      <div className="text-center p-4">
-        <InputText
-          placeholder={'Type the city name here.'}
-          handleEnter={searchLocation}
-         />
-        {renderSavedLocations()}
-        {renderCurrentWeather()}
-        {renderSaveStatus()}
-        {renderWeekForecast()}
+    <div className="w-screen h-screen bg-yellow-100">
+      <div className="w-screen h-[80px] bg-gray-50">
+        Weather Dashboard
+      </div>
+      <div className="flex relative">
+        <div className="float-left w-2/12 bg-red-200 ">
+          {renderSavedLocations()}
+        </div>
+        <div className="text-center w-10/12 p-4 bg-green-100">
+          <InputText
+            placeholder={'Type the city name here.'}
+            handleEnter={searchLocation}
+          />
+          <div className="flex">
+            {renderCurrentWeather()}
+            {renderSaveStatus()}
+          </div>
+          {renderWeekForecast()}
+        </div>
       </div>
     </div>
   );

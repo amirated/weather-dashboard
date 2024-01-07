@@ -33,7 +33,7 @@ const WeekForecast: FC<WeekForecastProps> = ({ weekData }) => {
                             </AccordionItemButton>
                         </AccordionItemHeading>
                         <AccordionItemPanel>
-                            <div className="">
+                            <div className="animate-appear">
                                 <div className="">
                                     <label>Pressure: </label>
                                     <label>{item.main.pressure} hPa</label>
