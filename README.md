@@ -1,46 +1,56 @@
-# Getting Started with Create React App
+# Weather Dashboard
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Overview
 
-## Available Scripts
+This Weather App project is a React application that leverages the [Open Weather](https://openweathermap.org/) API to provide real-time weather information for specified locations. It is designed to be user-friendly, accessible, and visually appealing. The project integrates several libraries and tools to enhance functionality and streamline development.
 
-In the project directory, you can run:
+## Features
 
-### `npm start`
+**Open Weather API Integration:** Fetches accurate and up-to-date weather information for the specified location, including temperature, conditions, and forecasts.
 
+**TypeScript:** The project is developed using TypeScript to enhance code readability, maintainability, and to catch potential errors during development.
+
+**Tailwind CSS:** Utilizes the Tailwind CSS framework for styling, ensuring a visually pleasing user interface.
+
+**Axios:** Makes use of Axios for efficient and easy HTTP requests to interact with the Open Weather API.
+
+**React Accessible Accordion:** Integrates the React Accessible Accordion library to provide an accessible and interactive accordion component for displaying additional weather details or forecasts.
+
+**React Icons:** Enhances the user interface with a variety of customizable icons from the React Icons library, providing clear visual indications of the application features.
+
+**Dnd-kit:** Implements drag-and-drop functionality using Dnd-kit for a seamless and intuitive user experience, allowing users to rearrange locations or customize their view.
+
+## Setup
+
+Follow these steps to setup and run this project in development:
+
+### Run `yarn`
+
+Installs the dependencies.
+
+### Create `.env` file
+
+Create an account on Open Weather to get your API key.
+Then add these lines in a `.env` file in the root directory of this project.
+```
+REACT_APP_OPENWEATHER_API_KEY=<PASTE_YOUR_API_KEY_HERE>
+REACT_APP_CURRENT_WEATHER_API_ENDPOINT=https://api.openweathermap.org/data/2.5/weather
+REACT_APP_WEEK_WEATHER_API_ENDPOINT=https://api.openweathermap.org/data/2.5/forecast
+```
+ 
+### Run `yarn start`
 Runs the app in the development mode.\
 Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
 The page will reload if you make edits.\
 You will also see any lint errors in the console.
 
-### `npm test`
+## Build
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `npm run build`
+### `yarn run build`
 
 Builds the app for production to the `build` folder.\
 It correctly bundles React in production mode and optimizes the build for the best performance.
 
 The build is minified and the filenames include the hashes.\
 Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
