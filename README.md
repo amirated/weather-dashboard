@@ -3,6 +3,7 @@
 ## Overview
 
 This Weather App project is a React application that leverages the [Open Weather](https://openweathermap.org/) API to provide real-time weather information for specified locations. It is designed to be user-friendly, accessible, and visually appealing. The project integrates several libraries and tools to enhance functionality and streamline development.
+[Project Demo](https://cloudfilesassignment.web.app/)
 
 ## Features
 
