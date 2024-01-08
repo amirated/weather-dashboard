@@ -6,7 +6,7 @@ function App() {
 
   return (
     <div className="w-screen h-screen bg-yellow-100">
-      <Header title={headerTitle} />
+      {/* <Header title={headerTitle} /> */}
       <Dashboard />
     </div>
   );

@@ -2,6 +2,7 @@ import { FC, useEffect, useState } from "react";
 import { DndContext, closestCenter, useSensor, useSensors } from "@dnd-kit/core";
 import { arrayMove, SortableContext, verticalListSortingStrategy } from "@dnd-kit/sortable";
 import Sortable from "./Sortable";
+import { IoIosArrowForward } from "react-icons/io";
 
 interface SortableListProps {
     itemList: any[];
@@ -37,9 +38,16 @@ const SortableList: FC<SortableListProps> = ({itemList, handleListChange, handle
                 items={list}
                 strategy={verticalListSortingStrategy}
             >
-                {list.map((item, index) => {
-                    return <Sortable key={`sortable-${item}-${index}`} item={item} handleOnClick={handleItemClick} />
-                })}
+                <div className="overflow-y-auto h-full">
+                    {list.map((item, index) => {
+                        return <div className="grid-row w-[100%] bg-blue-50" onClick={() => handleItemClick(item.key)}>
+                            <Sortable key={`sortable-${item}-${index}`} item={item} />
+                            <div className="float-right relative top-[-66px] cursor-pointer">
+                                <IoIosArrowForward />
+                            </div>
+                        </div>
+                    })}
+                </div>
             </SortableContext>
         </DndContext>
     );
