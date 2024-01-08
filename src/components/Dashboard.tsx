@@ -6,10 +6,10 @@ interface DashboardProps {
 }
 
 const Dashboard: FC<DashboardProps> = ({}) => {
-    const [savedLocations, setSavedLocations] = useState<string[]>([]);
+    const [savedLocations, setSavedLocations] = useState();
     
-    const updateSavedLocations = (list: string[]) => {
-        setSavedLocations([...list]);
+    const updateSavedLocations = (list: any) => {
+        setSavedLocations({...list});
     };
 
     return (

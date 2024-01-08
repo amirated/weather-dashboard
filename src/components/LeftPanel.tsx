@@ -1,18 +1,27 @@
-import React, { FC, useCallback, useEffect, useState } from "react";
+import { FC, useCallback } from "react";
 import SortableList from "./SortableList";
+import EmptyListView from "./EmptyListView";
 
 interface LeftPanelProps {
-    locationsList: string[];
+    locationsList: any;
 }
 
 const LeftPanel: FC<LeftPanelProps> = ({ locationsList }) => {
     const renderSavedLocations = useCallback(() => {
-        if (locationsList.length === 0) {
-            let savedLocationsList = localStorage.getItem('savedLocationsList') || '';
-            let locationsArr = savedLocationsList.split(',');
-            return <SortableList itemList={locationsArr}/>
+        if (!locationsList || Object.keys(locationsList).length === 0) {
+            let savedLocationsListString = localStorage.getItem('savedLocationsList');
+            if (!savedLocationsListString || savedLocationsListString === "" || savedLocationsListString === "{}") {
+                return <EmptyListView />;
+            } else {
+                let savedLocationsList: any = JSON.parse(savedLocationsListString);
+                let locationsArr: any[] = [];
+                locationsArr = Object.values(savedLocationsList);
+                return <SortableList itemList={locationsArr}/>
+            }
         } else {
-            return <SortableList itemList={locationsList}/>
+            let locationsArr: any[] = [];
+            locationsArr = Object.values(locationsList);
+            return <SortableList itemList={locationsArr}/>
         }
     }, [locationsList]);
 

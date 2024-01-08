@@ -1,8 +1,8 @@
 
 import { FC } from 'react';
 import {useSortable} from '@dnd-kit/sortable';
-import WeatherCard from './WeatherCard';
 import { CSS } from "@dnd-kit/utilities";
+import { RiDraggable } from "react-icons/ri";
 
 interface SortableProps {
     item: any;
@@ -24,9 +24,25 @@ const Sortable: FC<SortableProps> = ({item}) => {
   }
 
   return (
-    <div className="h-[100px] w-[100px] bg-yellow-50 rounded p-2 my-1" ref={setNodeRef} style={style} {...attributes} {...listeners}>
-      {/* <WeatherCard weatherData={item} /> */}
-      {item}
+    <div className="h-[110px] w-[95%] bg-white rounded p-2 my-1" ref={setNodeRef} style={style} {...attributes} {...listeners}>
+      <div className="flex">
+        <RiDraggable className="text-gray-400 text-2xl"/>
+        <div>
+          {item.name}, {item.country}
+        </div>
+      </div>
+      <div className="flex">
+        <div className="w-2/3">
+          <div className="pl-6 text-gray-400">{item.description}</div>
+          <div className="pl-6 mt-2 text-[1.5em]">{item.temperature.toFixed()}°C</div>
+        </div>
+        <div className="w-[50px] h-[50px] relative left-[10px]">
+          <img
+            src={`http://openweathermap.org/img/wn/${item.icon}.png`}
+            alt=""
+          />
+        </div>
+      </div>
     </div>
   );
 }

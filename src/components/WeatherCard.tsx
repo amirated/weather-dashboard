@@ -14,8 +14,7 @@ const WeatherCard: FC<WeatherCardProps> = ({ weatherData }) => {
                             <div>
                                 <div className="flex flex-col items-start justify-between h-full">
                                     <p className="text-xl">
-                                        {weatherData.name},
-                                        {weatherData.sys.country}
+                                        {weatherData.name}, {weatherData.sys.country}
                                     </p>
                                     <p className="text-sm">
                                         {weatherData.weather[0].description}
