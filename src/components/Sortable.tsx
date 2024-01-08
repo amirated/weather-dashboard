@@ -6,9 +6,10 @@ import { RiDraggable } from "react-icons/ri";
 
 interface SortableProps {
     item: any;
+    handleOnClick: any;
 }
 
-const Sortable: FC<SortableProps> = ({item}) => {
+const Sortable: FC<SortableProps> = ({item, handleOnClick}) => {
   const {
     attributes,
     listeners,
@@ -24,7 +25,7 @@ const Sortable: FC<SortableProps> = ({item}) => {
   }
 
   return (
-    <div className="h-[110px] w-[95%] bg-white rounded p-2 my-1" ref={setNodeRef} style={style} {...attributes} {...listeners}>
+    <div className="h-[110px] w-[95%] bg-white rounded p-2 my-1" ref={setNodeRef} onClick={() => handleOnClick(item.key)} style={style} {...attributes} {...listeners}>
       <div className="flex">
         <RiDraggable className="text-gray-400 text-2xl"/>
         <div>

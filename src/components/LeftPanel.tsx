@@ -4,9 +4,10 @@ import EmptyListView from "./EmptyListView";
 
 interface LeftPanelProps {
     locationsList: any;
+    updateCurrentLocation: any;
 }
 
-const LeftPanel: FC<LeftPanelProps> = ({ locationsList }) => {
+const LeftPanel: FC<LeftPanelProps> = ({ locationsList, updateCurrentLocation }) => {
     const handleListChange = (newList: any) => {
         let savedLocationsListJSONString = JSON.stringify(newList);
         localStorage.setItem('savedLocationsList', savedLocationsListJSONString);
@@ -21,12 +22,12 @@ const LeftPanel: FC<LeftPanelProps> = ({ locationsList }) => {
                 let savedLocationsList: any = JSON.parse(savedLocationsListString);
                 let locationsArr: any[] = [];
                 locationsArr = Object.values(savedLocationsList);
-                return <SortableList itemList={locationsArr} handleListChange={handleListChange}/>
+                return <SortableList itemList={locationsArr} handleListChange={handleListChange} handleItemClick={updateCurrentLocation} />
             }
         } else {
             let locationsArr: any[] = [];
             locationsArr = Object.values(locationsList);
-            return <SortableList itemList={locationsArr} handleListChange={handleListChange}/>
+            return <SortableList itemList={locationsArr} handleListChange={handleListChange} handleItemClick={updateCurrentLocation} />
         }
     }, [locationsList]);
 

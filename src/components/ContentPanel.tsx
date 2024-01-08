@@ -1,4 +1,4 @@
-import { FC, useCallback, useState } from "react";
+import { FC, useCallback, useEffect, useState } from "react";
 import InputText from "./InputText";
 import { getAPI } from "../utils/api";
 import WeatherCard from "./WeatherCard";
@@ -9,17 +9,25 @@ import ErrorView from "./ErrorView";
 
 interface ContentPanelProps {
     updateSavedLocations: any;
+    selectedLocationKey: any;
 }
 
 interface ObjectType {
   [key: string]: any
 }
 
-const ContentPanel: FC<ContentPanelProps> = ({ updateSavedLocations }) => {
+const ContentPanel: FC<ContentPanelProps> = ({ updateSavedLocations, selectedLocationKey }) => {
     const [data, setData] = useState();
     const [currentLocation, setCurrentLocation] = useState("");
     const [weekData, setWeekData] = useState();
     const [showError, setShowError] = useState(false);
+
+    useEffect(() => {
+      setCurrentLocation(selectedLocationKey);
+      if (selectedLocationKey && selectedLocationKey !== "") {
+        searchLocation(selectedLocationKey);
+      }
+    }, [selectedLocationKey]);
     
     const searchLocation = (location: string) => {
         const currentWeatherURL = `${process.env.REACT_APP_CURRENT_WEATHER_API_ENDPOINT}?q=${location}&units=metric&appid=${process.env.REACT_APP_OPENWEATHER_API_KEY}`;

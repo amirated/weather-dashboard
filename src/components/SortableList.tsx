@@ -6,9 +6,10 @@ import Sortable from "./Sortable";
 interface SortableListProps {
     itemList: any[];
     handleListChange: any;
+    handleItemClick: any;
 }
 
-const SortableList: FC<SortableListProps> = ({itemList, handleListChange}) => {
+const SortableList: FC<SortableListProps> = ({itemList, handleListChange, handleItemClick}) => {
     const [list, setList] = useState<any[]>([]);
 
     useEffect(() => {
@@ -17,7 +18,7 @@ const SortableList: FC<SortableListProps> = ({itemList, handleListChange}) => {
 
     const handleDragEnd = (event: any) => {
         const {active, over} = event;
-        if (active.id !== over.id) {
+        if (active && over && active.id !== over.id) {
             setList((items: any) => {
                 const activeIndex = items.indexOf(active.id);
                 const overIndex = items.indexOf(over.id);
@@ -37,7 +38,7 @@ const SortableList: FC<SortableListProps> = ({itemList, handleListChange}) => {
                 strategy={verticalListSortingStrategy}
             >
                 {list.map((item, index) => {
-                    return <Sortable key={`sortable-${item}-${index}`} item={item}/>
+                    return <Sortable key={`sortable-${item}-${index}`} item={item} handleOnClick={handleItemClick} />
                 })}
             </SortableContext>
         </DndContext>

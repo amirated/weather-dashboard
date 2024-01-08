@@ -7,15 +7,20 @@ interface DashboardProps {
 
 const Dashboard: FC<DashboardProps> = ({}) => {
     const [savedLocations, setSavedLocations] = useState();
+    const [currentLocation, setCurrentLocation] = useState<string>();
     
     const updateSavedLocations = (list: any) => {
         setSavedLocations({...list});
     };
+    
+    const updateCurrentLocation = (location: string) => {
+        setCurrentLocation(location);
+    };
 
     return (
         <div className="flex relative h-full">
-            <LeftPanel locationsList={savedLocations}/>
-            <ContentPanel updateSavedLocations={updateSavedLocations} />
+            <LeftPanel updateCurrentLocation={updateCurrentLocation} locationsList={savedLocations}/>
+            <ContentPanel updateSavedLocations={updateSavedLocations} selectedLocationKey={currentLocation} />
         </div>
     );
 };
