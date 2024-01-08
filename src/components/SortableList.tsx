@@ -39,6 +39,9 @@ const SortableList: FC<SortableListProps> = ({itemList, handleListChange, handle
                 strategy={verticalListSortingStrategy}
             >
                 <div className="overflow-y-auto h-full">
+                    <div className="h-[40px] text-gray-500 font-semibold py-2">
+                        My locations
+                    </div>
                     {list.map((item, index) => {
                         return <div className="grid-row w-[100%] bg-blue-50" onClick={() => handleItemClick(item.key)}>
                             <Sortable key={`sortable-${item}-${index}`} item={item} />

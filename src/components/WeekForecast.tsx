@@ -1,4 +1,4 @@
-import React, { FC, useEffect } from "react";
+import { FC } from "react";
 import { Accordion, AccordionItem, AccordionItemButton, AccordionItemHeading, AccordionItemPanel } from "react-accessible-accordion";
 
 interface WeekForecastProps {
@@ -20,31 +20,31 @@ const WeekForecast: FC<WeekForecastProps> = ({ weekData }) => {
                     return <AccordionItem key={`item-${index}`}>
                         <AccordionItemHeading>
                             <AccordionItemButton>
-                                <div className="bg-gray-200 border flex cursor-pointer rounded">
-                                    <img alt="weather" className="w-[40px] bg-blue-100" src={`http://openweathermap.org/img/wn/${weekData[index].weather[0].icon}.png`} />
-                                    <label className="mx-1 flex-1 cursor-pointer">{forecastDays[index]}</label>
-                                    <label className="mx-1 flex-1 cursor-pointer">{item.weather[0].description}</label>
-                                    <label className="mx-1 flex-1 cursor-pointer">{item.main.temp_min.toFixed()}°C / {item.main.temp_max.toFixed()}°C</label>
+                                <div className="bg-white border flex cursor-pointer rounded">
+                                    <img alt="weather" className="w-[40px]" src={`http://openweathermap.org/img/wn/${weekData[index].weather[0].icon}.png`} />
+                                    <label className="mx-1 flex-1 cursor-pointer py-2">{forecastDays[index]}</label>
+                                    <label className="mx-1 flex-1 cursor-pointer py-2">{item.weather[0].description}</label>
+                                    <label className="mx-1 flex-1 cursor-pointer py-2">{item.main.temp_min.toFixed()}°C / {item.main.temp_max.toFixed()}°C</label>
                                 </div>
                             </AccordionItemButton>
                         </AccordionItemHeading>
                         <AccordionItemPanel>
-                            <div className="animate-appear">
-                                <div className="">
+                            <div className="animate-appear bg-gray-50 border p-10">
+                                <div className="w-[35%] flex justify-between gap-x-8 text-gray-600">
                                     <label>Pressure: </label>
-                                    <label>{item.main.pressure} hPa</label>
+                                    <label className="font-semibold">{item.main.pressure} hPa</label>
                                 </div>
-                                <div className="">
+                                <div className="w-[35%] flex justify-between gap-x-8 text-gray-600">
                                     <label>Humidity: </label>
-                                    <label>{item.main.humidity}%</label>
+                                    <label className="font-semibold">{item.main.humidity}%</label>
                                 </div>
-                                <div className="">
+                                <div className="w-[35%] flex justify-between gap-x-8 text-gray-600">
                                     <label>Clouds: </label>
-                                    <label>{item.clouds.all}%</label>
+                                    <label className="font-semibold">{item.clouds.all}%</label>
                                 </div>
-                                <div className="">
+                                <div className="w-[35%] flex justify-between gap-x-8 text-gray-600">
                                     <label>Wind speed: </label>
-                                    <label>{item.wind.speed} m/s</label>
+                                    <label className="font-semibold">{item.wind.speed} m/s</label>
                                 </div>
                             </div>
                         </AccordionItemPanel>
