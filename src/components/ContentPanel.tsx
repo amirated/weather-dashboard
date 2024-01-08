@@ -46,12 +46,11 @@ const ContentPanel: FC<ContentPanelProps> = ({ updateSavedLocations }) => {
 
     const renderSaveStatus = useCallback(() => {
         const addToSavedLocations = (locationData: any) => {
-          console.log(locationData);
           let savedLocationsListString = localStorage.getItem('savedLocationsList');
-          let savedLocationsList: ObjectType = {};
+          let savedLocationsList: any = [];
           if (savedLocationsListString && savedLocationsListString !== "") {
             savedLocationsList = JSON.parse(savedLocationsListString);
-            savedLocationsList[currentLocation] = {
+            let newItem = {
               key: currentLocation,
               name: locationData.data.name,
               country: locationData.data.sys.country,
@@ -59,8 +58,9 @@ const ContentPanel: FC<ContentPanelProps> = ({ updateSavedLocations }) => {
               description: locationData.data.weather[0].description,
               icon: locationData.data.weather[0].icon
             };
+            savedLocationsList.push(newItem);
           } else {
-            savedLocationsList[currentLocation] = {
+            let newItem = {
               key: currentLocation,
               name: locationData.data.name,
               country: locationData.data.sys.country,
@@ -68,6 +68,7 @@ const ContentPanel: FC<ContentPanelProps> = ({ updateSavedLocations }) => {
               description: locationData.data.weather[0].description,
               icon: locationData.data.weather[0].icon
             };
+            savedLocationsList.push(newItem);
           }
           let savedLocationsListJSONString = JSON.stringify(savedLocationsList);
           localStorage.setItem('savedLocationsList', savedLocationsListJSONString);
@@ -76,10 +77,12 @@ const ContentPanel: FC<ContentPanelProps> = ({ updateSavedLocations }) => {
     
         const removeFromSavedLocations = () => {
           let savedLocationsListString = localStorage.getItem('savedLocationsList');
-          let savedLocationsList: ObjectType = {};
+          let savedLocationsList: any = [];
           if (savedLocationsListString && savedLocationsListString !== "") {
             savedLocationsList = JSON.parse(savedLocationsListString);
-            delete savedLocationsList[currentLocation];
+            savedLocationsList = savedLocationsList.filter((item: ObjectType) => {
+              return currentLocation !== item.key;
+            });
             localStorage.setItem('savedLocationsList', JSON.stringify(savedLocationsList));
             updateSavedLocations(savedLocationsList);
           }

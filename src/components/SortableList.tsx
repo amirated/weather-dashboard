@@ -5,9 +5,10 @@ import Sortable from "./Sortable";
 
 interface SortableListProps {
     itemList: any[];
+    handleListChange: any;
 }
 
-const SortableList: FC<SortableListProps> = ({itemList}) => {
+const SortableList: FC<SortableListProps> = ({itemList, handleListChange}) => {
     const [list, setList] = useState<any[]>([]);
 
     useEffect(() => {
@@ -20,6 +21,8 @@ const SortableList: FC<SortableListProps> = ({itemList}) => {
             setList((items: any) => {
                 const activeIndex = items.indexOf(active.id);
                 const overIndex = items.indexOf(over.id);
+                let newList = arrayMove(items, activeIndex, overIndex);
+                handleListChange(newList);
                 return arrayMove(items, activeIndex, overIndex);
             })
         }
