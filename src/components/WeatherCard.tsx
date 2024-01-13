@@ -1,7 +1,8 @@
 import React, { FC } from "react";
+import { ObjectType } from "../Types";
 
 interface WeatherCardProps {
-    weatherData: any;
+    weatherData: ObjectType;
 }
 
 const WeatherCard: FC<WeatherCardProps> = ({ weatherData }) => {

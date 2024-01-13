@@ -1,14 +1,15 @@
 import { FC, useCallback } from "react";
 import SortableList from "./SortableList";
 import EmptyListView from "./EmptyListView";
+import { LocationListType, ObjectType } from "../Types";
 
 interface LeftPanelProps {
-    locationsList: any;
-    updateCurrentLocation: any;
+    locationsList: LocationListType;
+    updateCurrentLocation: (location: string) => void;
 }
 
 const LeftPanel: FC<LeftPanelProps> = ({ locationsList, updateCurrentLocation }) => {
-    const handleListChange = (newList: any) => {
+    const handleListChange = (newList: LocationListType) => {
         let savedLocationsListJSONString = JSON.stringify(newList);
         localStorage.setItem('savedLocationsList', savedLocationsListJSONString);
     };
@@ -19,13 +20,13 @@ const LeftPanel: FC<LeftPanelProps> = ({ locationsList, updateCurrentLocation })
             if (!savedLocationsListString || savedLocationsListString === "" || savedLocationsListString === "{}" || savedLocationsListString === "[]") {
                 return <EmptyListView />;
             } else {
-                let savedLocationsList: any = JSON.parse(savedLocationsListString);
-                let locationsArr: any[] = [];
+                let savedLocationsList: ObjectType = JSON.parse(savedLocationsListString);
+                let locationsArr: LocationListType = [];
                 locationsArr = Object.values(savedLocationsList);
                 return <SortableList itemList={locationsArr} handleListChange={handleListChange} handleItemClick={updateCurrentLocation} />
             }
         } else {
-            let locationsArr: any[] = [];
+            let locationsArr: LocationListType = [];
             locationsArr = Object.values(locationsList);
             return <SortableList itemList={locationsArr} handleListChange={handleListChange} handleItemClick={updateCurrentLocation} />
         }
