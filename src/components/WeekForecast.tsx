@@ -1,8 +1,9 @@
 import { FC } from "react";
 import { Accordion, AccordionItem, AccordionItemButton, AccordionItemHeading, AccordionItemPanel } from "react-accessible-accordion";
+import { ObjectType } from "../Types";
 
 interface WeekForecastProps {
-    weekData: any;
+    weekData: ObjectType;
 }
 
 const WEEK_DAYS = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
@@ -16,7 +17,7 @@ const WeekForecast: FC<WeekForecastProps> = ({ weekData }) => {
         <div className="mt-6">
             {/* <label className="">Five days forecast</label> */}
             <Accordion allowZeroExpanded>
-                {weekData.map((item: any, index: number) => {
+                {weekData.map((item: ObjectType, index: number) => {
                     return <AccordionItem key={`item-${index}`}>
                         <AccordionItemHeading>
                             <AccordionItemButton>

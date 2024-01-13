@@ -1,12 +1,12 @@
-import React, { FC, useState } from 'react';
+import { FC, useState } from 'react';
 
 interface InputTextProps {
   placeholder: string;
-  handleEnter: any;
+  handleEnter: (value: string) => void;
 }
 
 const InputText: FC<InputTextProps> = ({ placeholder, handleEnter }) => {
-  const [value, setValue] = useState("");
+  const [value, setValue] = useState<string>("");
   const handleKeyDown = (event: {key: string;}) => {
     if (event.key === "Enter") {
       handleEnter(value);

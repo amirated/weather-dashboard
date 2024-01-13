@@ -6,25 +6,22 @@ import { FaBookmark, FaRegBookmark } from "react-icons/fa6";
 import WeekForecast from "./WeekForecast";
 import EmptyContent from "./EmptyContent";
 import ErrorView from "./ErrorView";
+import { LocationKeyType, LocationListType, ObjectType } from "../Types";
 
 interface ContentPanelProps {
-    updateSavedLocations: any;
-    selectedLocationKey: any;
-}
-
-interface ObjectType {
-  [key: string]: any
+    updateSavedLocations: (savedLocationsList: LocationListType) => void;
+    selectedLocationKey: LocationKeyType;
 }
 
 const ContentPanel: FC<ContentPanelProps> = ({ updateSavedLocations, selectedLocationKey }) => {
-    const [data, setData] = useState();
+    const [data, setData] = useState<ObjectType>();
     const [currentLocation, setCurrentLocation] = useState("");
     const [weekData, setWeekData] = useState();
     const [showError, setShowError] = useState(false);
 
     useEffect(() => {
-      setCurrentLocation(selectedLocationKey);
       if (selectedLocationKey && selectedLocationKey !== "") {
+        setCurrentLocation(selectedLocationKey);
         searchLocation(selectedLocationKey);
       }
     }, [selectedLocationKey]);
@@ -34,13 +31,13 @@ const ContentPanel: FC<ContentPanelProps> = ({ updateSavedLocations, selectedLoc
         const weekForecastURL = `${process.env.REACT_APP_WEEK_WEATHER_API_ENDPOINT}?q=${location}&units=metric&appid=${process.env.REACT_APP_OPENWEATHER_API_KEY}`;
     
         
-        getAPI(currentWeatherURL).then((res: any) => {
+        getAPI(currentWeatherURL).then((res: ObjectType) => {
           setCurrentLocation(location);
           setData(res);
         }).catch(() => {
           setShowError(true);
         });
-        getAPI(weekForecastURL).then((res: any) => {
+        getAPI(weekForecastURL).then((res: ObjectType) => {
           setCurrentLocation(location);
           setWeekData(res.list.splice(0, 5));
         }).catch(() => {
@@ -53,9 +50,9 @@ const ContentPanel: FC<ContentPanelProps> = ({ updateSavedLocations, selectedLoc
     }, [data]);
 
     const renderSaveStatus = useCallback(() => {
-        const addToSavedLocations = (locationData: any) => {
+        const addToSavedLocations = (locationData: ObjectType) => {
           let savedLocationsListString = localStorage.getItem('savedLocationsList');
-          let savedLocationsList: any = [];
+          let savedLocationsList: LocationListType = [];
           if (savedLocationsListString && savedLocationsListString !== "") {
             savedLocationsList = JSON.parse(savedLocationsListString);
             let newItem = {
@@ -66,7 +63,7 @@ const ContentPanel: FC<ContentPanelProps> = ({ updateSavedLocations, selectedLoc
               description: locationData.data.weather[0].description,
               icon: locationData.data.weather[0].icon
             };
-            savedLocationsList.push(newItem);
+            savedLocationsList?.push(newItem);
           } else {
             let newItem = {
               key: currentLocation,
@@ -85,10 +82,10 @@ const ContentPanel: FC<ContentPanelProps> = ({ updateSavedLocations, selectedLoc
     
         const removeFromSavedLocations = () => {
           let savedLocationsListString = localStorage.getItem('savedLocationsList');
-          let savedLocationsList: any = [];
+          let savedLocationsList: LocationListType = [];
           if (savedLocationsListString && savedLocationsListString !== "") {
             savedLocationsList = JSON.parse(savedLocationsListString);
-            savedLocationsList = savedLocationsList.filter((item: ObjectType) => {
+            savedLocationsList = savedLocationsList?.filter((item: ObjectType) => {
               return currentLocation !== item.key;
             });
             localStorage.setItem('savedLocationsList', JSON.stringify(savedLocationsList));
