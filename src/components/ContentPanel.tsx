@@ -93,15 +93,34 @@ const ContentPanel: FC<ContentPanelProps> = ({ updateSavedLocations, selectedLoc
           }
         };
     
-        let savedLocationsList = localStorage.getItem('savedLocationsList') || '';
+        let savedLocationsListString = localStorage.getItem('savedLocationsList');
+        let savedLocationsList: LocationListType = [];
+        if (savedLocationsListString && savedLocationsListString !== "") {
+          savedLocationsList = JSON.parse(savedLocationsListString);
+        }
         if (!currentLocation) {
           return null;
-        } else if (savedLocationsList && savedLocationsList.indexOf(currentLocation) !== -1) {
-          return <>
-            <button className="relative left-[230px]" onClick={() => removeFromSavedLocations()}>
-              <FaBookmark className="text-blue-500" />
-            </button>
-          </>
+        } else if (savedLocationsList) {
+          let savedFlag = false;
+          savedLocationsList.forEach((item: ObjectType) => {
+            if (currentLocation === item.key) {
+              savedFlag = true;
+              return;
+            }
+          })
+          if (savedFlag) {
+            return <>
+              <button className="relative left-[230px]" onClick={() => removeFromSavedLocations()}>
+                <FaBookmark className="text-blue-500" />
+              </button>
+            </>
+          } else {
+            return <>
+              <button className="relative left-[230px]" onClick={() => addToSavedLocations({data})}>
+                <FaRegBookmark className="text-blue-500" />
+              </button>
+            </>
+          }
         } else {
           return <>
             <button className="relative left-[230px]" onClick={() => addToSavedLocations({data})}>
