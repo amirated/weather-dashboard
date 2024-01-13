@@ -46,7 +46,7 @@ const SortableList: FC<SortableListProps> = ({itemList, handleListChange, handle
                         My locations
                     </div>
                     {list.map((item, index) => {
-                        return <div className="grid-row w-[100%] bg-blue-50" onClick={() => handleItemClick(item.key)}>
+                        return <div key={`${item.key}-${index}`} className="grid-row w-[100%] bg-blue-50" onClick={() => handleItemClick(item.key)}>
                             <Sortable key={`sortable-${item}-${index}`} item={item} />
                             <div className="float-right relative top-[-66px] cursor-pointer">
                                 <IoIosArrowForward />

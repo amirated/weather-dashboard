@@ -18,7 +18,7 @@ const Dashboard: FC<DashboardProps> = ({}) => {
     };
 
     return (
-        <div className="flex relative h-full">
+        <div className="flex relative min-h-full">
             <LeftPanel updateCurrentLocation={updateCurrentLocation} locationsList={savedLocations}/>
             <ContentPanel updateSavedLocations={updateSavedLocations} selectedLocationKey={currentLocation} />
         </div>

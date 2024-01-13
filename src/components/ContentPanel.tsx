@@ -135,7 +135,7 @@ const ContentPanel: FC<ContentPanelProps> = ({ updateSavedLocations, selectedLoc
     }, [weekData]);
 
     return (
-        <div className="w-9/12 p-4 bg-gray-100">
+        <div className="w-9/12 p-4 bg-gray-100 min-h-full">
             <InputText
                 placeholder={'Type the city name here.'}
                 handleEnter={searchLocation}
